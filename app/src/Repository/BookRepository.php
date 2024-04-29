@@ -1,11 +1,8 @@
 <?php
-/**
- * Task repository.
- */
 
 namespace App\Repository;
 
-use App\Entity\Task;
+use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
@@ -13,16 +10,16 @@ use Doctrine\Persistence\ManagerRegistry;
 /**
  * Class TaskRepository.
  *
- * @method Task|null find($id, $lockMode = null, $lockVersion = null)
- * @method Task|null findOneBy(array $criteria, array $orderBy = null)
- * @method Task[]    findAll()
- * @method Task[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Book|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Book|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Book[]    findAll()
+ * @method Book[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  *
- * @extends ServiceEntityRepository<Task>
+ * @extends ServiceEntityRepository<Book>
  *
  * @psalm-suppress LessSpecificImplementedReturnType
  */
-class TaskRepository extends ServiceEntityRepository
+class BookRepository extends ServiceEntityRepository
 {
     /**
      * Items per page.
@@ -42,7 +39,7 @@ class TaskRepository extends ServiceEntityRepository
      */
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Task::class);
+        parent::__construct($registry, Book::class);
     }
 
     /**
@@ -53,9 +50,8 @@ class TaskRepository extends ServiceEntityRepository
     public function queryAll(): QueryBuilder
     {
         return $this->getOrCreateQueryBuilder()
-            ->orderBy('task.updatedAt', 'DESC');
+            ->orderBy('book.title', 'ASC');
     }
-
     /**
      * Get or create new query builder.
      *
@@ -65,6 +61,6 @@ class TaskRepository extends ServiceEntityRepository
      */
     private function getOrCreateQueryBuilder(QueryBuilder $queryBuilder = null): QueryBuilder
     {
-        return $queryBuilder ?? $this->createQueryBuilder('task');
+        return $queryBuilder ?? $this->createQueryBuilder('book');
     }
 }

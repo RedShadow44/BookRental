@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    {{ 'title.task_list'|trans }}
+    {{ 'title.book_list'|trans }}
 {% endblock %}
 
 {% block body %}
-    <h1>{{ 'title.task_list'|trans }}</h1>
+    <h1>{{ 'title.book_list'|trans }}</h1>
     {% if pagination is defined and pagination.items|length %}
 
         <div class="navigation text-center">
@@ -15,22 +15,22 @@
         <table class="table table-striped">
             <thead>
             <tr>
-                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'task.id') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.created_at'|trans, 'task.createdAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.updated_at'|trans, 'task.updatedAt') }}</th>
-                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'task.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.id'|trans, 'book.id') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.title'|trans, 'book.title') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.author'|trans, 'book.author') }}</th>
+                <th>{{ knp_pagination_sortable(pagination, 'label.description'|trans, 'book.description') }}</th>
                 <th>{{ 'label.actions'|trans }}</th>
             </tr>
             </thead>
             <tbody>
-            {% for task in pagination.items %}
+            {% for book in pagination.items %}
                 <tr>
-                    <td>{{ task.id }}</td>
-                    <td>{{ task.createdAt|date('Y/m/d') }}</td>
-                    <td>{{ task.updatedAt|date('Y/m/d') }}</td>
-                    <td>{{ task.title }}</td>
+                    <td>{{ book.id }}</td>
+                    <td>{{ book.title }}</td>
+                    <td>{{ book.author }}</td>
+                    <td>{{ book.description }}</td>
                     <td>
-                        <a href="{{ url('task_show', {id: task.id}) }}" title="{{ 'action.show'|trans }}">
+                        <a href="{{ url('book_show', {id: book.id}) }}" title="{{ 'action.show'|trans }}">
                             {{ 'action.show'|trans }}
                         </a>
                     </td>
